@@ -16,8 +16,9 @@ run_lnit_tests:
   stage: test
   before_script:
     - echo "Preparing test data..."
+    - chmod +x myscript.sh
   script:
-    - echo "Running tests..."
+    - ./myscript.sh
   after_script:
     - echo "Cleaning up temporary files..."
 
