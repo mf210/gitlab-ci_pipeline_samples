@@ -1,3 +1,6 @@
+variables:
+  - DEPLOY_SITE: "https://example.com"
+
 workflow:
   rules:
     - if: $CI_COMMIT_BRANCH != "main" && SCI_PIPELINE_SOURCE != "merge_request_event"
@@ -12,16 +15,18 @@ stages:
 run_unit_tests:
   stage: test
   before_script:
-    - echo "Preparing test data..."
+    - echo "Preparing test data... $DEPLOY_SITE"
   script:
     - echo "Running tests..."
   after_script:
     - echo "Cleaning up temporary files..."
 
 run_lnit_tests:
+  variables:
+    - APP_PATH: "/my_app/"
   stage: test
   before_script:
-    - echo "Preparing test data..."
+    - echo "Preparing test data...$APP_PATH"
     - chmod +x myscript.sh
   script:
     - ./myscript.sh
